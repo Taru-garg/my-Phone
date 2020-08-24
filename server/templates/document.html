@@ -1,0 +1,34 @@
+{%extends 'layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+{% block style %}
+    <style>
+          .wrapper .main_container .item:hover{
+                background: rgb(194, 191, 191);
+            }
+            p {
+                padding: 1px 0;
+                text-align: justify;
+            }
+    </style>
+{% endblock style %}
+
+{% block content %}
+    <ul>
+    {% for i in range(0,len) %}
+    <div class="item">
+        <li>
+            <p>
+            <span class="icon"><i class="fas fa-file"></i></span>       
+            <a href="{{documents[i]}}">
+                <span class="text">{{document_name[i]}}</span>
+            </a>
+            </p>
+        </li>
+    </div>
+    {% endfor %}
+    </ul>
+{% endblock content%}

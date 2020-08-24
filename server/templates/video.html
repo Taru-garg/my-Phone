@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+    <style>
+          .wrapper .main_container .item:hover{
+                background: rgb(194, 191, 191);
+            }
+    </style>
+{% endblock style %}
+
+
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+
+{% block  content %}
+    {% for i in range(0,len) %}
+    <div class = "item">
+        <video controls src="{{videos[i]}}" > </audio> {{video_names[i]}}
+    </div>
+    {% endfor %}
+{% endblock content %}
