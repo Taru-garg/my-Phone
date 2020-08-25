@@ -13,34 +13,35 @@ def get_my_ip():
     s.close()
     return ip
 
-
-
-
+depth = 1;
 
 def list_files(dir_name):
     files_list = []
     '''
     folder_list = []
     '''
+
     for item in os.listdir(dir_name):
         full_path = os.path.join(dir_name,item)
         if os.path.isfile(full_path):
             files_list.append(full_path)
-        '''
-        elif not os.path.isfile(item):
-            folder_list.append(item)
-        '''
-    '''    
-    if len(folder_list) not 0:
+        elif os.path.isdir(full_path):
+            for item_in in os.listdir(full_path):
+                new_full_path = os.path.join(full_path,item_in)
+                if os.path.isfile(new_full_path):
+                    files_list.append(new_full_path)
+
+    '''
+    if len(folder_list) > 0 and depth <=2:
+        depth = depth + 1;
+        internal_list = []
         for i in range(0,len(folder_list)):
-            files_list.append(list_files(folder_list[i]))
+            internal_list = list_files(folder_list[i])
+            print(internal_list)
+        for i in range(0,len(internal_list)):
+            files_list.append(internal_list[i])
     '''
     return files_list
-
-'''
-[1, 2, 3, 1,2,3 ]
-/home/taru/Pictures/x/1
-'''
 
 def list_files_name(dir_name):
     files_list = []
@@ -48,6 +49,11 @@ def list_files_name(dir_name):
         full_path = os.path.join(dir_name,item)
         if os.path.isfile(full_path):
             files_list.append(item)
+        elif os.path.isdir(full_path):
+            for item_in in os.listdir(full_path):
+                new_full_path = os.path.join(full_path,item_in)
+                if os.path.isfile(new_full_path):
+                    files_list.append(item_in)
     return files_list
 
 
@@ -59,4 +65,10 @@ def list_files_name_shortened(dir_name):
         if os.path.isfile(full_path):
             name,_ = item.split('-')
             files_list.append(name)
+        elif os.path.isdir(full_path):
+            for item_in in os.listdir(full_path):
+                new_full_path = os.path.join(full_path,item_in)
+                if os.path.isfile(new_full_path):
+                    files_list.append(item_in)
     return files_list
+
