@@ -17,6 +17,7 @@ depth = 1;
 
 def list_files(dir_name):
     files_list = []
+
     '''
     folder_list = []
     '''
@@ -41,6 +42,7 @@ def list_files(dir_name):
         for i in range(0,len(internal_list)):
             files_list.append(internal_list[i])
     '''
+    
     return files_list
 
 def list_files_name(dir_name):
