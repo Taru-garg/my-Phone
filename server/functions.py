@@ -18,6 +18,11 @@ depth = 1
 def list_files(dir_name):
     global depth
     files_list = []
+<<<<<<< HEAD
+=======
+
+    '''
+>>>>>>> c1f1cab95ab685bdd2fd30101ab7e3b1c33ddf59
     folder_list = []
     for item in os.listdir(dir_name):
         full_path = os.path.join(dir_name,item)
@@ -37,9 +42,17 @@ def list_files(dir_name):
         internal_list = []
         for i in range(0,len(folder_list)):
             internal_list = list_files(folder_list[i])
+<<<<<<< HEAD
             for files in internal_list:
                 files_list.append(files)
 
+=======
+            print(internal_list)
+        for i in range(0,len(internal_list)):
+            files_list.append(internal_list[i])
+    '''
+    
+>>>>>>> c1f1cab95ab685bdd2fd30101ab7e3b1c33ddf59
     return files_list
 
 def list_files_name(dir_name):
