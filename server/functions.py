@@ -52,13 +52,18 @@ def list_files_name(dir_name):
 
 def list_files_name_shortened(dir_name):
     files_list = []
+    folder_list = []
     for item in os.listdir(dir_name):
         full_path = os.path.join(dir_name,item)
         if os.path.isfile(full_path):
-            name,_ = item.split('-')
-            files_list.append(name)
+            _ = item.split('-')
+            files_list.append(_[0])
         elif os.path.isdir(full_path):
-            for item_in in os.listdir(full_path):
-                new_full_path = os.path.join(full_path,item_in)
-                if os.path.isfile(new_full_path):
-                    files_list.append(item_in)
+            folder_list.append(full_path)
+    if len(folder_list) > 0:
+        internal_list = []
+        for i in range(0,len(folder_list)):
+            internal_list = list_files_name(folder_list[i])
+            for i in range(0,len(internal_list)):
+                files_list.append(internal_list[i])
+    return files_list
