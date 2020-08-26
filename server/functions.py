@@ -13,46 +13,34 @@ def get_my_ip():
     s.close()
     return ip
 
-depth = 1
+depth = 1;
 
 def list_files(dir_name):
-    global depth
     files_list = []
-<<<<<<< HEAD
-=======
-
     '''
->>>>>>> c1f1cab95ab685bdd2fd30101ab7e3b1c33ddf59
     folder_list = []
+    '''
+
     for item in os.listdir(dir_name):
         full_path = os.path.join(dir_name,item)
         if os.path.isfile(full_path):
             files_list.append(full_path)
-        elif os.path.isdir(full_path) and depth<2:
-            folder_list.append(full_path)
-        '''
         elif os.path.isdir(full_path):
             for item_in in os.listdir(full_path):
                 new_full_path = os.path.join(full_path,item_in)
                 if os.path.isfile(new_full_path):
                     files_list.append(new_full_path)
-        '''
-    if len(folder_list) > 0 and depth <2:
-        depth = depth + 1
+
+    '''
+    if len(folder_list) > 0 and depth <=2:
+        depth = depth + 1;
         internal_list = []
         for i in range(0,len(folder_list)):
             internal_list = list_files(folder_list[i])
-<<<<<<< HEAD
-            for files in internal_list:
-                files_list.append(files)
-
-=======
             print(internal_list)
         for i in range(0,len(internal_list)):
             files_list.append(internal_list[i])
     '''
-    
->>>>>>> c1f1cab95ab685bdd2fd30101ab7e3b1c33ddf59
     return files_list
 
 def list_files_name(dir_name):
@@ -83,5 +71,3 @@ def list_files_name_shortened(dir_name):
                 if os.path.isfile(new_full_path):
                     files_list.append(item_in)
     return files_list
-
-print(list_files('/home/taru/Downloads'))
