@@ -53,3 +53,11 @@ def video():
         len=len(list_files(video_dir)),
         video_names=list_files_name(video_dir),
     )
+
+
+@app.route("/findPhone")
+def findPhone():
+    proc = subprocess.Popen(['play 1.wav'], shell=True)
+    time.sleep(2)
+    proc.terminate()
+    return '<h1>Your Phone Must be Ringing</h1>'
