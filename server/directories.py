@@ -5,9 +5,9 @@ import getpass
 By default Linux
 """
 
-main_dir = "/home/" + str(getpass.getuser()) + "/"
-photos_dir = main_dir + "Pictures"
-document_dir = main_dir + "Documents"
+main_dir = "/storage/emulated/0/"
+photos_dir = main_dir + "DCIM/Camera"
+document_dir = main_dir + "Downloads"
 music_dir = main_dir + "Music"
 video_dir = main_dir + "Videos"
 

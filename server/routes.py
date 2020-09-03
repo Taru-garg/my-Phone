@@ -1,6 +1,6 @@
 from imports import *
 
-app = Flask(__name__, static_url_path="/home", static_folder="/home")
+app = Flask(__name__, static_url_path="/storage/emulated/0", static_folder="/storage/emulated/0")
 
 
 @app.route("/")
