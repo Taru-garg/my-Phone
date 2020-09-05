@@ -6,18 +6,8 @@ By default Linux
 """
 
 main_dir = "/storage/emulated/0/"
-photos_dir = main_dir + "DCIM/Camera"
-document_dir = main_dir + "Downloads"
-music_dir = main_dir + "Music"
-video_dir = main_dir + "Videos"
+photos_dir = main_dir + "DCIM"
+document_dir = main_dir + "Download"
+music_dir = main_dir + "MIUI"
+video_dir = main_dir + "WhatsApp/Media/WhatsApp Video"
 
-
-"""
-os.system()
-    1. Windows
-    2. Linux
-    3. Android
-
-if name == 'Windows'
-    directory(windows)
-"""

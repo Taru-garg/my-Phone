@@ -22,7 +22,7 @@
 }
 
 .column img {
-  margin-top: 8px;
+  margin-top: 5px;
   vertical-align: middle;
   width: 100%;
 }
@@ -34,11 +34,8 @@ img:hover {
 img { 
   border: 1px solid black; 
 } 
-img:hover { 
-  outline: 6px solid black; 
-} 
 /* Responsive layout - makes a two column-layout instead of four columns */
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   .column {
     flex: 50%;
     max-width: 50%;
@@ -60,7 +57,7 @@ img:hover {
 <div class="row"> 
   {%for i in range(0,length) %}
     <div class="column">
-      <img src="{{photos[i]}}" style="width:100%">
+      <img src="{{photos[i]}}" style="width:100%" height="80%">
     </div>
   {% endfor %}
 </div>
