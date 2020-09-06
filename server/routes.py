@@ -11,7 +11,11 @@ def home():
 
 @app.route("/photos", methods=["POST", "GET"])
 def photos():
-    all_files = list_files(photos_dir)
+    all_files = []
+    for photo in photos_dir:
+        files_ = list_files(photo)
+        for a_file in files_:
+            all_files.append(a_file)
     photos = []
     for photo in all_files:
         if photo.rpartition('.')[-1] in photolst:
@@ -23,8 +27,15 @@ def photos():
 
 @app.route("/documents")
 def documents():
-    all_files = list_files(document_dir)
-    all_files_names = list_files_name(document_dir)
+    all_files = []
+    all_files_names = []
+    for doc in document_dir:
+        files_ = list_files(doc)
+        files_names = list_files_name(doc)
+        for a_file in files_:
+            all_files.append(a_file)
+        for a_file_name in files_names:
+            all_files_names.append(a_file_name)
     documents = []
     documents_names = []
     for i in range(0,len(all_files)):
@@ -42,8 +53,15 @@ def documents():
 
 @app.route("/music")
 def music():
-    all_files = list_files(music_dir)
-    all_files_names = list_files_name_shortened(music_dir)
+    all_files = []
+    all_files_names = []
+    for music_ in music_dir:
+        files_ = list_files(music_)
+        files_names = list_files_name_shortened(music_)
+        for a_file in files_:
+            all_files.append(a_file)
+        for a_file_name in files_names:
+            all_files_names.append(a_file_name)
     ids = []
     music = []
     music_names = []
@@ -65,8 +83,15 @@ def music():
 
 @app.route("/video")
 def video():
-    all_files = list_files(video_dir)
-    all_files_names = list_files_name_shortened(video_dir)
+    all_files = []
+    all_files_names = []
+    for video_ in video_dir:
+        files_ = list_files(video_dir)
+        files_names = list_files_name(video_dir)
+        for a_file in files_:
+            all_files.append(a_file)
+        for a_file_name in files_names:
+            all_files_names.append(a_file_name)
     ids = []
     videos = []
     video_names = []
