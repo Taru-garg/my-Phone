@@ -86,8 +86,8 @@ def video():
     all_files = []
     all_files_names = []
     for video_ in video_dir:
-        files_ = list_files(video_dir)
-        files_names = list_files_name(video_dir)
+        files_ = list_files(video_)
+        files_names = list_files_name(video_)
         for a_file in files_:
             all_files.append(a_file)
         for a_file_name in files_names:
@@ -111,7 +111,7 @@ def video():
 
 @app.route("/findPhone")
 def findPhone():
-    proc = subprocess.Popen(['play 1.wav'], shell=True)
-    time.sleep(2)
-    proc.terminate()
-    return '<h1>Your Phone Must be Ringing</h1>'
+    os.system('termux-media-player play iphone_6-30.ogg')
+    return redirect('/home')
+
+
