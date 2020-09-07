@@ -92,7 +92,6 @@ def video():
             all_files.append(a_file)
         for a_file_name in files_names:
             all_files_names.append(a_file_name)
-    ids = []
     videos = []
     video_names = []
     for i in range(0,len(all_files)):
@@ -101,7 +100,7 @@ def video():
             video_names.append(all_files_names[i])
         
     return render_template(
-        "video.html",
+        "video(1).html",
         title="Video",
         videos=videos,
         len=len(videos),

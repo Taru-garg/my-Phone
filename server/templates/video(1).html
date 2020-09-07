@@ -4,55 +4,44 @@
     {{title}}
 {% endblock title %}
 
+
 {%block style %}
 <style>
-		#vd{
-			display:block;
-			margin-left: auto;
-            margin-right: auto;
-            border:10px ridge #ddd;
-		}
-		.element{
-			font-size:1.5em;
-			font-weight:200;
-			padding-top: :20px;
-			border:2px solid #7171ca;
-			background-color: #d9d9f6;
-		}
-	</style>
+	#vd{
+		display:block;
+		margin-left: auto;
+        margin-right: auto;
+	}
+	p {
+		text-align : center;
+	}
+</style>
 {%endblock style %}
 
 {% block content %}
 <div>
-<video id="vd" width="500px" height="350px" controls src="All_Videos\vid_1.mp4" type="video/mp4" >
-	
-</video>
+<video id="vd" width="700px" height="400px" controls src="{{videos[0]}}"> </video>
 </div>
+<br>
 <div>
-	<ul>
-		
+	<ul id = 'video_loc'>
 	</ul>
 </div>
 </body>
+<script type="text/javascript">
+	var videos={{video_names|tojson}};
+	var sources= {{videos|tojson}};
+    for(var i=0;i<videos.length;i++){
+        $("#video_loc").append('<div class = "item"><li class="element" id="'+sources[i]+'"><span class="icon"><i class="fas fa-video"></i></span><span class="text_video"><p>'+ videos[i] +'</p></span></li></div>');
+    }
+    let elements=document.querySelectorAll(".element");
+    let v=document.querySelector("#vd");
+    for(let j=0;j<elements.length;j++){
+        elements[j].addEventListener("click",function(){
+        	var x=elements[j].id;
+        	v.setAttribute("src",x);
+        })
+    }
+
+</script>
 {% endblock content%}
-
-{% block script %}
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script type="text/javascript">
-	    
-		var videos={{video_names|tojson}};
-		var sources= {{videos|tojson}}
-        for(var i=0;i<videos.length;i++){
-           $("ul").append('<li class="element" id="'+sources[i]+'">'+ videos[i] +'</li>');
-        }
-        let elements=document.querySelectorAll(".element");
-        let v=document.querySelector("#vd");
-        for(let j=0;j<elements.length;j++){
-        	elements[j].addEventListener("click",function(){
-        		var x=elements[j].id;
-        		v.setAttribute("src",x);
-        	})
-        }
-
-	</script>
-{% endblock script %}
