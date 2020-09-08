@@ -1,5 +1,5 @@
 from imports import *
-
+import json
 app = Flask(__name__, static_url_path="/storage/emulated/0", static_folder="/storage/emulated/0")
 
 
@@ -113,4 +113,18 @@ def findPhone():
     os.system('termux-media-player play iphone_6-30.ogg')
     return redirect('/home')
 
+@app.route('/notification')
+def notif():
+    notifs = subprocess.check_output('termux-notification-list')
+    for notif in notifs:
+    	print(json.dumps(notif))
+    return render_template('notif.html',title='Notifications',notifs = notifs);
+    
+@app.route('/contact')
+def contact():
+    contacts = subprocess.check_output('termux-contact-list')
+    contact = contacts.decode('utf8').replace("'", '"')
+    data = json.loads(contact)
+    s = json.dumps(data)
+    return render_template('contact.html',title='Contacts',contacts=s)
 

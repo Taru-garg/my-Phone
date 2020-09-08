@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+
+
+{% block content %}
+<div>
+    <ul id = 'contact_loc'>
+    </ul>
+</div> 
+<script>
+    var i = {{contacts|tojson}};
+    var contact = JSON.parse(i);
+    for(var u =0;u < contact.length; u++) {
+        $('#contact_loc').append('<div class="item"><li><b>'+contact[u]['name']+'</b>&emsp;'+contact[u]['number']+'</li></div>');
+    }
+</script>
+{% endblock content %}
