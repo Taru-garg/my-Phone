@@ -126,5 +126,10 @@ def contact():
     contact = contacts.decode('utf8').replace("'", '"')
     data = json.loads(contact)
     s = json.dumps(data)
-    return render_template('contact.html',title='Contacts',contacts=s)
+    return render_template('contact.html',title='Contacts',contacts=s,data=data)
 
+@app.route('/call/<number>')
+def call(number):
+    make_command = 'termux-telephony-call ' + str(number)
+    os.system(make_command)
+    return redirect('contact')

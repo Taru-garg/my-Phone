@@ -221,11 +221,14 @@
    </div>
     <div class="top_menu">
       <div class="logo">
-        myPhone - {% block title %} {% endblock %}
+        <a href="{{url_for('home')}}"> myPhone </a> - {% block title %} {% endblock %}
       </div>
       <ul>
         <li> 
-          <a href="{{url_for('findPhone')}}"> <i class = "fas fa-phone"></i></a>
+          <a href="{{url_for('findPhone')}}"> <i class = "fas fa-exclamation-triangle"></i></a>
+        </li>
+        <li>
+          <a href="{{url_for('contact')}}"> <i class = "fas fa-address-book"></i></a>
         </li>
       </ul>
     </div>
@@ -248,10 +251,6 @@
         <li><a href="{{url_for('photos')}}">
           <span class="icon"><i class="fas fa-image"></i></span>
           <span class="title">Pictures</span>
-          </a></li>
-        <li><a href="#">
-          <span class="icon"><i class="fas fa-envelope"></i></span>
-          <span class="title">SMS</span>
           </a></li>
           <li><a href="https://web.whatsapp.com/" target="_blank">
             <span class="icon"><i class="fab fa-whatsapp"></i></span>
