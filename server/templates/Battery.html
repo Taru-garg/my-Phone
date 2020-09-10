@@ -6,13 +6,15 @@
             <link href="Style.css" rel="stylesheet" type="text/css">
         </head>
         <body>
-            <div class="battery-icon"><div class="battery-level"></div></div>
+            <div class="battery-icon" ><div class="battery-level" id="batt">
+            </div>
+            </div>
             <script>
-                var s={"health":"GOOD","percentage":90,"status":"Charging"};
-                var obj=JSON.parse(s);
+                var obj=JSON.parse('{"health":"GOOD","percentage":"60%","status":"Charging"}');                
+                console.log(obj);
                 var percent=obj.percentage;
-                var batterylevel = jQuery('.battery-icon .battery-level');
-                batterylevel.css('width',level,'%');
+                var width = document.getElementById("batt");
+                width.style.width=percent; 
             </script>
         </body>
     </html>
