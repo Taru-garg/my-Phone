@@ -1,0 +1,48 @@
+
+
+body{
+    background: #3e3e3e;
+}
+.battery-icon{
+    width: 200px;
+    height: 60px;
+    border: 5px solid #FFF;
+    border-radius: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+}
+.battery-icon:after{
+    content: '';
+    position: absolute;
+    right: -15px;
+    top: 50px;
+    transform: translateY(-50%);
+    width: 15px;
+    height: 30px;
+    background: #FFF;
+    border-radius: 5px;
+
+}
+.battery-icon .battery-level{
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 40%;
+    height: 52px;
+    background: #c8f86b;
+    border-radius: 5px;
+    text-align: center;
+}
+.battery-icon .battery-level.high{
+    background: #c8f86b;
+}
+.battery-icon .battery-level.medium{
+    background: #FCD110;
+}
+.battery-icon .battery-level.low{
+    background: #FF3333;
+}
