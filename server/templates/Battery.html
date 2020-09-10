@@ -1,0 +1,18 @@
+<Doctype HTML>
+    <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>Battery-icon</title>
+            <link href="Style.css" rel="stylesheet" type="text/css">
+        </head>
+        <body>
+            <div class="battery-icon"><div class="battery-level"></div></div>
+            <script>
+                var s={"health":"GOOD","percentage":90,"status":"Charging"};
+                var obj=JSON.parse(s);
+                var percent=obj.percentage;
+                var batterylevel = jQuery('.battery-icon .battery-level');
+                batterylevel.css('width',level,'%');
+            </script>
+        </body>
+    </html>
