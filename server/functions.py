@@ -1,6 +1,7 @@
 import os
+import subprocess
 import socket
-
+import json
 
 def get_my_ip():
     """
@@ -69,3 +70,11 @@ def list_files_name_shortened(dir_name, depth=1):
                 _ = internal_list[i].split("-")
                 files_list.append(_[0])
     return files_list
+
+
+def battery():
+    x = subprocess.check_output('termux-battery-status')
+    battery_ = x.decode('utf8').replace("'", '"')
+    battery_actual = json.dumps(json.loads(battery_))
+    return battery_actual
+
