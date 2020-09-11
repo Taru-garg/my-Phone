@@ -225,11 +225,71 @@
       </div>
       <ul>
         <li> 
-          <a href="{{url_for('findPhone')}}"> <i class = "fas fa-exclamation-triangle"></i></a>
+          <a href="{{url_for('findPhone')}}" title="Find Phone"> <i class = "fas fa-exclamation-triangle"></i></a>
         </li>
         <li>
-          <a href="{{url_for('contact')}}"> <i class = "fas fa-address-book"></i></a>
+          <a href="{{url_for('contact')}}" title="Contacts"> <i class = "fas fa-address-book"></i></a>
         </li>
+        <li>
+        <style>
+          .battery-icon{
+              width: 50px;
+              height: 20px;
+              border: 3px solid rgb(0, 0, 0);
+              border-radius: 10px;
+              position: relative;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%,-50%);
+          
+          }
+          .battery-icon:after{
+              content: '';
+              position: relative;
+              right: -15px;
+              top: 50px;
+              transform: translateY(-50%);
+              width: 15px;
+              height: 30px;
+              background: rgb(0, 0, 0);
+              border-radius: 5px;
+          
+          }
+          .battery-icon .battery-level{
+              content: '';
+              position: absolute;
+              top: 1px;
+              left: 2px;
+              height: 12px;
+              background: #c8f86b;
+              border-radius: 5px;
+              text-align: center;
+          }
+          .battery-icon .battery-level.high{
+              background: #c8f86b;
+          }
+          .battery-icon .battery-level.medium{
+              background: #FCD110;
+          }
+          .battery-icon .battery-level.low{
+              background: #FF3333;
+          }
+          
+          </style>
+          <div class="battery-icon" ><div class="battery-level" id="batt">
+          </div>
+          </div>
+          <script>
+            var new_obj={{battery|tojson}};
+            var obj = JSON.parse(new_obj);                
+            console.log(obj);
+            var percent=obj.percentage;
+            var width = document.getElementById("batt");
+            percent = percent+"%";
+            width.style.width=percent; 
+            width.title = percent;
+        </script>
+          </li>
       </ul>
     </div>
   </div>

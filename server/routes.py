@@ -1,12 +1,11 @@
 from imports import *
-import json
 app = Flask(__name__, static_url_path="/storage/emulated/0", static_folder="/storage/emulated/0")
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home.html", title="Home")
+    return render_template("home.html", title="Home",battery=battery())
 
 
 @app.route("/photos", methods=["POST", "GET"])
@@ -21,7 +20,7 @@ def photos():
         if photo.rpartition('.')[-1] in photolst:
             photos.append(photo)
     return render_template(
-        "photos.html", title="Photos", photos=photos, length=len(photos)
+        "photos.html", title="Photos", photos=photos, length=len(photos),len_dec=int(len(photos)/100),battery=battery()
     )
 
 
@@ -48,6 +47,7 @@ def documents():
         documents=documents,
         len=len(documents),
         document_name=documents_names,
+        battery=battery()
     )
 
 
@@ -78,6 +78,7 @@ def music():
         len=len(music),
         music_name=music_names,
         ids=ids,
+        battery=battery()
     )
 
 
@@ -105,6 +106,7 @@ def video():
         videos=videos,
         len=len(videos),
         video_names=video_names,
+        battery=battery()
     )
 
 
@@ -126,10 +128,6 @@ def contact():
     contact = contacts.decode('utf8').replace("'", '"')
     data = json.loads(contact)
     s = json.dumps(data)
-    return render_template('contact.html',title='Contacts',contacts=s,data=data)
+    return render_template('contact.html',title='Contacts',contacts=s,battery=battery())
 
-@app.route('/call/<number>')
-def call(number):
-    make_command = 'termux-telephony-call ' + str(number)
-    os.system(make_command)
-    return redirect('contact')
+
