@@ -1,0 +1,162 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    {{title}}
+{% endblock title %}
+{% block style %}
+<style>
+input:focus, button:focus {
+  outline:none;
+}
+div {
+  box-sizing:border-box;
+}
+.container {
+  width:250px;
+  background:#a19e9e;
+  margin:40px auto 0px auto;
+  border-radius:30px;
+  box-shadow:0 2px 5px 0 #ccc;
+}
+.u_p {
+  width:100%;
+  padding-top:50px;
+  padding-bottom:10px;
+}
+.u_p::after {
+  display:block;
+  content:"";
+  clear:both;
+}
+.u_p .input{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+.u_p .input input {
+  width:100%;
+  box-sizing:border-box;
+  padding:8px;
+  border:none;
+  font-size:18px;
+  font-weight:500;
+  font-family:'montserrat';
+  text-align:right;
+  color:#363636;
+  border:2px solid white;
+  border-radius: 10px;
+}
+.l_p {
+  background:black;
+  border-bottom-left-radius:30px;
+  border-bottom-right-radius:30px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  padding-top:10px;
+  padding-bottom:10px;
+  padding-left:20px;
+  padding-right:20px;
+  height:350px;
+}
+.l_p ._row {
+  width:100%;
+  padding:8px 0;
+}
+.l_p ._row::after {
+  display:block;
+  content:"";
+  clear:both;
+} 
+.l_p ._row ._col-3 {
+  width:33.3333%;
+  float:left;
+  text-align: center;
+}
+.l_p ._row ._col-3 button {
+  width:50px;
+  height:50px;
+  border-radius:100%;
+  border:none;
+  font-family:'montserrat';
+  font-weight: 700;
+  font-size:2em;
+  color:black;
+  background:#fff;
+  box-shadow:0 5px 10px 0 #eee;
+}
+.l_p ._row ._col-3 button:focus {
+  background:#9e9191;
+}
+.l_p ._row ._col-2 {
+  width:50%;
+  padding-left:10px;
+  padding-right:10px;
+  float:left;
+}
+.l_p ._row ._col-2 button {
+  width:50px;
+  height:50px;
+  border-radius:100%;
+  border:none;
+  color:#fff;
+  box-shadow:0 5px 10px 0 #eee;
+}
+.l_p ._row ._col-2 button#call{
+   background:#1DE0B4;
+}
+.l_p ._row ._col-2 button#backspace{
+  background: #eb5353;
+}
+</style>
+{% endblock style %}
+{% block content %}
+
+<div class="container">
+    <div class="u_p">
+      <div class="input" align="right">
+        <input type="text" placeholder="Enter Phone Number">
+      </div>
+    </div>
+    <div class="l_p">
+      <div class="_row">
+        <div class="_col-3"><button>1</button></div>
+        <div class="_col-3"><button>2</button></div>
+        <div class="_col-3"><button>3</button></div>
+      </div>
+      <div class="_row">
+        <div class="_col-3"><button>4</button></div>
+        <div class="_col-3"><button>5</button></div>
+        <div class="_col-3"><button>6</button></div>
+      </div>
+      <div class="_row">
+        <div class="_col-3"><button>7</button></div>
+        <div class="_col-3"><button>8</button></div>
+        <div class="_col-3"><button>9</button></div>
+      </div>
+      <div class="_row">
+        <div class="_col-3"><button>*</button></div>
+        <div class="_col-3"><button>0</button></div>
+        <div class="_col-3"><button>#</button></div>
+      </div>
+      <div class="_row">
+        <div class="_col-2"><button id="call" align="left"><i class="fas fa-phone" style="font-size:24px"></i></button></div>
+        <div class="_col-2" align="right"> <button id="backspace"><i class="fas fa-backspace" style="font-size:24px"></i></button></div>
+      </div>
+    </div>
+</div>
+<script>
+var input = document.querySelectorAll(".input input")[0];
+var backspace = document.getElementById("backspace");
+var button = document.querySelectorAll("._col-3 button");
+for(var i = 0; i < button.length; i++){
+  button[i].addEventListener('click', function(){
+    var num1 = input.value;
+    var num2 = this.childNodes[0].nodeValue;
+    num = num1+num2
+    input.value = num;
+  });
+}
+backspace.addEventListener('click', function(){
+  input.value = "";
+});
+</script>
+{% endblock content %}_
