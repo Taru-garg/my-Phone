@@ -111,37 +111,39 @@ div {
 {% block content %}
 
 <div class="container">
+  <form action = "{{url_for('call')}}" method="post">
     <div class="u_p">
       <div class="input" align="right">
-        <input type="text" placeholder="Enter Phone Number">
+        <input type="text" placeholder="Enter Phone Number" name = "phone">
       </div>
     </div>
     <div class="l_p">
       <div class="_row">
-        <div class="_col-3"><button>1</button></div>
-        <div class="_col-3"><button>2</button></div>
-        <div class="_col-3"><button>3</button></div>
+        <div class="_col-3"><button type = "button">1</button></div>
+        <div class="_col-3"><button type = "button">2</button></div>
+        <div class="_col-3"><button type = "button">3</button></div>
       </div>
       <div class="_row">
-        <div class="_col-3"><button>4</button></div>
-        <div class="_col-3"><button>5</button></div>
-        <div class="_col-3"><button>6</button></div>
+        <div class="_col-3"><button type = "button">4</button></div>
+        <div class="_col-3"><button type = "button">5</button></div>
+        <div class="_col-3"><button type = "button">6</button></div>
       </div>
       <div class="_row">
-        <div class="_col-3"><button>7</button></div>
-        <div class="_col-3"><button>8</button></div>
-        <div class="_col-3"><button>9</button></div>
+        <div class="_col-3"><button type = "button">7</button></div>
+        <div class="_col-3"><button type = "button">8</button></div>
+        <div class="_col-3"><button type = "button">9</button></div>
       </div>
       <div class="_row">
-        <div class="_col-3"><button>*</button></div>
-        <div class="_col-3"><button>0</button></div>
-        <div class="_col-3"><button>#</button></div>
+        <div class="_col-3"><button type = "button">*</button></div>
+        <div class="_col-3"><button type = "button">0</button></div>
+        <div class="_col-3"><button type = "button">#</button></div>
       </div>
       <div class="_row">
         <div class="_col-2"><button id="call" align="left"><i class="fas fa-phone" style="font-size:24px"></i></button></div>
-        <div class="_col-2" align="right"> <button id="backspace"><i class="fas fa-backspace" style="font-size:24px"></i></button></div>
+        <div class="_col-2" align="right"> <button type = "button" id="backspace"><i class="fas fa-backspace" style="font-size:24px"></i></button></div>
       </div>
     </div>
+    </form>
 </div>
 <script>
 var input = document.querySelectorAll(".input input")[0];
