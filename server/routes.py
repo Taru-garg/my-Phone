@@ -5,7 +5,7 @@ app = Flask(__name__, static_url_path="/storage/emulated/0", static_folder="/sto
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home.html", title="Home",battery=battery())
+    return render_template("home_1.html", title="Home",battery=battery())
 
 
 @app.route("/photos", methods=["POST", "GET"])
@@ -130,4 +130,22 @@ def contact():
     s = json.dumps(data)
     return render_template('contact.html',title='Contacts',contacts=s,battery=battery())
 
+@app.route('/call',methods=['POST','GET'])
+def call():
+    to_call = request.form['phone']
+    try:
+        os.system("termux-telephony-call "+ to_call)
+    except:
+    	pass
+    return redirect('/home')
+
+@app.route('/clipboard')
+def get_clipboard():
+    try:
+        clipboard = os.system('termux-clipboard-get')
+        #print(clipboard)
+        return redirect('/home')
+    except:
+    	pass
+    	return "ERROR"
 
