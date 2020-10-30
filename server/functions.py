@@ -3,6 +3,7 @@ import subprocess
 import socket
 import json
 
+
 def get_my_ip():
     """
     Find my IP address
@@ -73,8 +74,7 @@ def list_files_name_shortened(dir_name, depth=1):
 
 
 def battery():
-    x = subprocess.check_output('termux-battery-status')
-    battery_ = x.decode('utf8').replace("'", '"')
+    x = subprocess.check_output("termux-battery-status")
+    battery_ = x.decode("utf8").replace("'", '"')
     battery_actual = json.dumps(json.loads(battery_))
     return battery_actual
-

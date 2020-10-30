@@ -223,8 +223,24 @@
         <a href="{{url_for('home')}}"> myPhone </a> - {% block title %} {% endblock %}
       </div>
       <ul>
+        <script>
+      	  function copyfunc() {
+			let copyText = $.get({url:'/clipboard'});
+			//copyText.select();
+			//document.execCommand('copy');
+			console.log(copyText);
+			alert(copyText.responseText)
+	  }
+	  function findphone() {
+	  	$.post({url:'/findPhone'});
+	  	alert("Your phone must be ringing now");
+	  }
+      	  </script>
+      	<li> 
+          <a href="javascript:void(0);" onclick="copyfunc();" title="Copy Text"> <i class = "fa fa-clipboard"></i></a>
+        </li>
         <li> 
-          <a href="{{url_for('findPhone')}}" title="Find Phone"> <i class = "fas fa-exclamation-triangle"></i></a>
+          <a href="javascript:void(0);" onclick="findphone();" id = "findphone" title="Notplaying"> <i class = "fas fa-exclamation-triangle"></i></a>
         </li>
         <li>
           <a href="{{url_for('contact')}}" title="Contacts"> <i class = "fas fa-address-book"></i></a>
