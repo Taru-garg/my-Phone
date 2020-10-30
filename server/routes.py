@@ -1,11 +1,15 @@
 from imports import *
-app = Flask(__name__, static_url_path="/storage/emulated/0", static_folder="/storage/emulated/0")
+from flask import make_response, jsonify
+
+app = Flask(
+    __name__, static_url_path="/storage/emulated/0", static_folder="/storage/emulated/0"
+)
 
 
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home_1.html", title="Home",battery=battery())
+    return render_template("home_1.html", title="Home", battery=battery())
 
 
 @app.route("/photos", methods=["POST", "GET"])
@@ -17,10 +21,15 @@ def photos():
             all_files.append(a_file)
     photos = []
     for photo in all_files:
-        if photo.rpartition('.')[-1] in photolst:
+        if photo.rpartition(".")[-1] in photolst:
             photos.append(photo)
     return render_template(
-        "photos.html", title="Photos", photos=photos, length=len(photos),len_dec=int(len(photos)/100),battery=battery()
+        "photos.html",
+        title="Photos",
+        photos=photos,
+        length=len(photos),
+        len_dec=int(len(photos) / 100),
+        battery=battery(),
     )
 
 
@@ -37,8 +46,8 @@ def documents():
             all_files_names.append(a_file_name)
     documents = []
     documents_names = []
-    for i in range(0,len(all_files)):
-        if all_files[i].rpartition('.')[2] in doclst:
+    for i in range(0, len(all_files)):
+        if all_files[i].rpartition(".")[2] in doclst:
             documents.append(all_files[i])
             documents_names.append(all_files_names[i])
     return render_template(
@@ -47,7 +56,7 @@ def documents():
         documents=documents,
         len=len(documents),
         document_name=documents_names,
-        battery=battery()
+        battery=battery(),
     )
 
 
@@ -65,8 +74,8 @@ def music():
     ids = []
     music = []
     music_names = []
-    for i in range(0,len(all_files)):
-        if all_files[i].rpartition('.')[2] in musiclst:
+    for i in range(0, len(all_files)):
+        if all_files[i].rpartition(".")[2] in musiclst:
             music.append(all_files[i])
             music_names.append(all_files_names[i])
     for i in range(1, len(music) + 1):
@@ -78,7 +87,7 @@ def music():
         len=len(music),
         music_name=music_names,
         ids=ids,
-        battery=battery()
+        battery=battery(),
     )
 
 
@@ -95,57 +104,60 @@ def video():
             all_files_names.append(a_file_name)
     videos = []
     video_names = []
-    for i in range(0,len(all_files)):
-        if all_files[i].rpartition('.')[2] in videolst:
+    for i in range(0, len(all_files)):
+        if all_files[i].rpartition(".")[2] in videolst:
             videos.append(all_files[i])
             video_names.append(all_files_names[i])
-        
+
     return render_template(
         "video(1).html",
         title="Video",
         videos=videos,
         len=len(videos),
         video_names=video_names,
-        battery=battery()
+        battery=battery(),
     )
 
 
-@app.route("/findPhone")
+@app.route("/findPhone",methods=["GET","POST"])
 def findPhone():
-    os.system('termux-media-player play iphone_6-30.ogg')
-    return redirect('/home')
+    if request.method == "POST":	
+    	os.system("termux-media-player play iphone_6-30.ogg")
+    	return {"Message":"Playing"}
+    return redirect("/home")
 
-@app.route('/notification')
+
+@app.route("/notification")
 def notif():
-    notifs = subprocess.check_output('termux-notification-list')
+    notifs = subprocess.check_output("termux-notification-list")
     for notif in notifs:
-    	print(json.dumps(notif))
-    return render_template('notif.html',title='Notifications',notifs = notifs);
-    
-@app.route('/contact')
+        print(json.dumps(notif))
+    return render_template("notif.html", title="Notifications", notifs=notifs)
+
+
+@app.route("/contact")
 def contact():
-    contacts = subprocess.check_output('termux-contact-list')
-    contact = contacts.decode('utf8').replace("'", '"')
+    contacts = subprocess.check_output("termux-contact-list")
+    contact = contacts.decode("utf8").replace("'", '"')
     data = json.loads(contact)
     s = json.dumps(data)
-    return render_template('contact.html',title='Contacts',contacts=s,battery=battery())
+    return render_template(
+        "contact.html", title="Contacts", contacts=s, battery=battery()
+    )
 
-@app.route('/call',methods=['POST','GET'])
+
+@app.route("/call", methods=["POST", "GET"])
 def call():
-    to_call = request.form['phone']
+    to_call = request.form["phone"]
     try:
-        os.system("termux-telephony-call "+ to_call)
+        os.system("termux-telephony-call " + to_call)
     except:
-    	pass
-    return redirect('/home')
+        pass
+    return redirect("/home")
 
-@app.route('/clipboard')
+
+@app.route("/clipboard", methods=["GET", "POST"])
 def get_clipboard():
-    try:
-        clipboard = os.system('termux-clipboard-get')
-        #print(clipboard)
-        return redirect('/home')
-    except:
-    	pass
-    	return "ERROR"
-
+    if request.method == "GET":
+        return make_response(jsonify({"Message":str(subprocess.check_output("termux-clipboard-get").decode())}),200)
+    return redirect("/home")
