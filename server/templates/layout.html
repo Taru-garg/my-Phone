@@ -224,10 +224,13 @@
       </div>
       <ul>
         <script>
-      	  function copyfunc() {
-			let copyText = $.get({url:'/clipboard'});
-			console.log(copyText);
-			alert(copyText.responseText)
+      	  async function copyfunc() {
+		    var xmlHttp = new XMLHttpRequest();
+    		    xmlHttp.open( "GET", "/clipboard", false ); // false for synchronous request
+    		    xmlHttp.send( null );
+        	    var resp = JSON.parse(xmlHttp.responseText);
+        	    alert(resp.Message);
+        	    
 	  }
 	  function findphone() {
 	  	if(document.getElementById("findphone").title == "Notplaying") {
