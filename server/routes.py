@@ -175,5 +175,11 @@ def call():
 @app.route("/clipboard", methods=["GET", "POST"])
 def get_clipboard():
     if request.method == "GET":
-        return jsonify({"Message": str(subprocess.check_output("termux-clipboard-get").decode("utf8"))})
+        return jsonify(
+            {
+                "Message": str(
+                    subprocess.check_output("termux-clipboard-get").decode("utf8")
+                )
+            }
+        )
     return redirect("/home")
