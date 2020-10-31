@@ -226,14 +226,23 @@
         <script>
       	  function copyfunc() {
 			let copyText = $.get({url:'/clipboard'});
-			//copyText.select();
-			//document.execCommand('copy');
 			console.log(copyText);
 			alert(copyText.responseText)
 	  }
 	  function findphone() {
-	  	$.post({url:'/findPhone'});
-	  	alert("Your phone must be ringing now");
+	  	if(document.getElementById("findphone").title == "Notplaying") {
+	  	    $.post({url:'/findPhone',
+	  		    data: {'data': "Play"}
+	  		    });
+	  	    alert("Your phone must be ringing now");
+	  	    document.getElementById("findphone").title = "Playing"
+	  	} else {
+	  	 $.post({url:'/findPhone',
+	  		    data: {'data': "Stop"}
+	  		    });
+	  	    alert("Did you just find where your phone was?");
+	  	    document.getElementById("findphone").title = "Notplaying";
+	  	}
 	  }
       	  </script>
       	<li> 

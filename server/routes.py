@@ -11,6 +11,9 @@ app = Flask(
 def home():
     return render_template("home_1.html", title="Home", battery=battery())
 
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html",battery=battery())
 
 @app.route("/photos", methods=["POST", "GET"])
 def photos():
@@ -121,18 +124,29 @@ def video():
 
 @app.route("/findPhone",methods=["GET","POST"])
 def findPhone():
-    if request.method == "POST":	
-    	os.system("termux-media-player play iphone_6-30.ogg")
-    	return {"Message":"Playing"}
+    if request.method == "POST":
+    	passed = request.form["data"]
+    	if passed == "Play":
+    	    try:
+    	        os.system("termux-media-player play iphone_6-30.ogg")
+    	        return {"Message":"Playing"}
+    	    except:
+    	        pass
+    	else:
+    	    try:
+    	        os.system("termux-media-player stop")
+    	        return {"Message":"Stopped"}
+    	    except:
+    	    	pass
     return redirect("/home")
 
 
-@app.route("/notification")
-def notif():
-    notifs = subprocess.check_output("termux-notification-list")
-    for notif in notifs:
-        print(json.dumps(notif))
-    return render_template("notif.html", title="Notifications", notifs=notifs)
+#@app.route("/notification")
+#def notif():
+#    notifs = subprocess.check_output("termux-notification-list")
+#    for notif in notifs:
+#        print(json.dumps(json.loads(notif)))
+#    return render_template("notif.html", title="Notifications", notifs=notifs)
 
 
 @app.route("/contact")
