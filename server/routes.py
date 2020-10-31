@@ -11,9 +11,11 @@ app = Flask(
 def home():
     return render_template("home_1.html", title="Home", battery=battery())
 
+
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html",battery=battery())
+    return render_template("404.html", battery=battery())
+
 
 @app.route("/photos", methods=["POST", "GET"])
 def photos():
@@ -122,27 +124,27 @@ def video():
     )
 
 
-@app.route("/findPhone",methods=["GET","POST"])
+@app.route("/findPhone", methods=["GET", "POST"])
 def findPhone():
     if request.method == "POST":
-    	passed = request.form["data"]
-    	if passed == "Play":
-    	    try:
-    	        os.system("termux-media-player play iphone_6-30.ogg")
-    	        return {"Message":"Playing"}
-    	    except:
-    	        pass
-    	else:
-    	    try:
-    	        os.system("termux-media-player stop")
-    	        return {"Message":"Stopped"}
-    	    except:
-    	    	pass
+        passed = request.form["data"]
+        if passed == "Play":
+            try:
+                os.system("termux-media-player play iphone_6-30.ogg")
+                return {"Message": "Playing"}
+            except:
+                pass
+        else:
+            try:
+                os.system("termux-media-player stop")
+                return {"Message": "Stopped"}
+            except:
+                pass
     return redirect("/home")
 
 
-#@app.route("/notification")
-#def notif():
+# @app.route("/notification")
+# def notif():
 #    notifs = subprocess.check_output("termux-notification-list")
 #    for notif in notifs:
 #        print(json.dumps(json.loads(notif)))
@@ -173,5 +175,14 @@ def call():
 @app.route("/clipboard", methods=["GET", "POST"])
 def get_clipboard():
     if request.method == "GET":
-        return make_response(jsonify({"Message":str(subprocess.check_output("termux-clipboard-get").decode())}),200)
+        return make_response(
+            jsonify(
+                {
+                    "Message": str(
+                        subprocess.check_output("termux-clipboard-get").decode()
+                    )
+                }
+            ),
+            200,
+        )
     return redirect("/home")
