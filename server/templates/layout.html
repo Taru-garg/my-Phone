@@ -247,6 +247,19 @@
 	  	    document.getElementById("findphone").title = "Notplaying";
 	  	}
 	  }
+	  var percentage = setInterval(async function(){
+	  	var xmlHttp = new XMLHttpRequest();
+          	xmlHttp.open( "POST", "/getBattery", false ); // false for synchronous request
+    	  	xmlHttp.send( null );
+         	var resp = JSON.parse(xmlHttp.responseText).Message;
+         	var percent = JSON.parse(resp).percentage + "%";
+         	var width = document.getElementById("batt");
+         	width.style.width=percent; 
+            	width.title = percent;
+	  },10000)
+	  
+          //alert(JSON.parse(resp.Message).percentage);
+        	    
       	  </script>
       	<li> 
           <a href="javascript:void(0);" onclick="copyfunc();" title="Copy Text"> <i class = "fa fa-clipboard"></i></a>
@@ -304,18 +317,18 @@
           
           </style>
           <div class="battery-icon" ><div class="battery-level" id="batt">
-          </div>
-          </div>
           <script>
-            var new_obj={{battery|tojson}};
-            var obj = JSON.parse(new_obj);                
-            console.log(obj);
-            var percent=obj.percentage;
-            var width = document.getElementById("batt");
-            percent = percent+"%";
-            width.style.width=percent; 
-            width.title = percent;
-        </script>
+          	var xmlHttp = new XMLHttpRequest();
+          	xmlHttp.open( "POST", "/getBattery", false ); // false for synchronous request
+    	  	xmlHttp.send( null );
+         	var resp = JSON.parse(xmlHttp.responseText).Message;
+         	var percent = JSON.parse(resp).percentage + "%";
+         	var width = document.getElementById("batt");
+         	width.style.width=percent; 
+            	width.title = percent;
+          </script>
+          </div>
+          </div>
           </li>
       </ul>
     </div>
