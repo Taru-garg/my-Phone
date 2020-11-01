@@ -9,12 +9,15 @@ app = Flask(
 @app.route("/")
 @app.route("/home")
 def home():
-    return render_template("home_1.html", title="Home", battery=battery())
+    return render_template(
+        "home_1.html",
+        title="Home",
+    )
 
 
 @app.errorhandler(404)
 def not_found(e):
-    return render_template("404.html", battery=battery())
+    return render_template("404.html")
 
 
 @app.route("/photos", methods=["POST", "GET"])
@@ -34,7 +37,6 @@ def photos():
         photos=photos,
         length=len(photos),
         len_dec=int(len(photos) / 100),
-        battery=battery(),
     )
 
 
@@ -61,7 +63,6 @@ def documents():
         documents=documents,
         len=len(documents),
         document_name=documents_names,
-        battery=battery(),
     )
 
 
@@ -92,7 +93,6 @@ def music():
         len=len(music),
         music_name=music_names,
         ids=ids,
-        battery=battery(),
     )
 
 
@@ -120,7 +120,6 @@ def video():
         videos=videos,
         len=len(videos),
         video_names=video_names,
-        battery=battery(),
     )
 
 
@@ -149,6 +148,11 @@ def findPhone():
 #    for notif in notifs:
 #        print(json.dumps(json.loads(notif)))
 #    return render_template("notif.html", title="Notifications", notifs=notifs)
+@app.route("/getBattery", methods=["GET", "POST"])
+def getBattery():
+    if request.method == "POST":
+        return jsonify({"Message": battery()})
+    return redirect("/home")
 
 
 @app.route("/contact")
@@ -158,7 +162,9 @@ def contact():
     data = json.loads(contact)
     s = json.dumps(data)
     return render_template(
-        "contact.html", title="Contacts", contacts=s, battery=battery()
+        "contact.html",
+        title="Contacts",
+        contacts=s,
     )
 
 
