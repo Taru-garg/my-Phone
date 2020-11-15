@@ -19,8 +19,8 @@ def findtag(image_path, c_time):
 
 
 def api(image_path):
-    api_key = "acc_4789f20196cd49d"
-    api_secret = "8a15436aeb272e9e498d68db95af7fd9"
+    api_key = ""
+    api_secret = ""
     response = requests.post(
         "https://api.imagga.com/v2/tags?limit=3",
         auth=(api_key, api_secret),
