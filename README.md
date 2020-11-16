@@ -44,7 +44,7 @@ Then for the rest of the features it is termux-api that comes into play. By usin
     python myPhone_server.py 
     ```
 ## TODO ##
-  * We always wanted to somehow bring audio(call) somwehow to laptop so that a person can make a call through this app and talk without even lifting the phone but 
+  * We always wanted to somehow bring audio(call) to laptop so that a person can make a call through this app and talk without even lifting the phone but 
     couldn't figure that out.
   * Notification Access
   * Some security
