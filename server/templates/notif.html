@@ -8,12 +8,31 @@
 
 
 {% block content %}
-    {{notifs}}
+	<ul id = "notificationsWrapper">
+	</ul>
 {% endblock content %}
 
 
 {% block script %}
 <script>
-    var i = [];
+	$(document).ready(function(){
+		var my_var = {{notifs|tojson}}
+		console.log(my_var);
+		let notification_track_id = new Map();
+		let notification_track_title = new Map();
+		my_var = JSON.parse(my_var);
+		for(var i =0;i < my_var.length; i++) {
+		    let notification_id =  my_var[i]["id"];
+		    let notification_title =  my_var[i]["title"];
+		    let notification_content = my_var[i]["content"];
+		    if(notification_track_id.has(notification_id) || notification_track_title.has(notification_title)) {
+		    	continue;
+		    } else {
+		    	notification_track_id.set(notification_id, 1);
+		    	notification_track_title.set(notification_title, 1);
+		    	$('#notificationsWrapper').append('<div class="item"><li><h3>'+ notification_title +'</h3><p>' + notification_content + '</p></li></div>');
+		    }
+		}
+	});	
 </script>
 {% endblock script%}

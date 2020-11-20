@@ -142,12 +142,14 @@ def findPhone():
     return redirect("/home")
 
 
-# @app.route("/notification")
-# def notif():
-#    notifs = subprocess.check_output("termux-notification-list")
-#    for notif in notifs:
-#        print(json.dumps(json.loads(notif)))
-#    return render_template("notif.html", title="Notifications", notifs=notifs)
+@app.route("/notification")
+def notif():
+    notifs = subprocess.check_output("termux-notification-list")
+    notifs = str(notifs.decode("utf8"))
+    
+    return render_template("notif.html", title="Notifications", notifs=notifs)
+
+
 @app.route("/getBattery", methods=["GET", "POST"])
 def getBattery():
     if request.method == "POST":
@@ -189,3 +191,4 @@ def get_clipboard():
             }
         )
     return redirect("/home")
+    
