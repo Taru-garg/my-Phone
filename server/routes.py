@@ -142,11 +142,12 @@ def findPhone():
     return redirect("/home")
 
 
-@app.route("/notification")
+@app.route("/notification",methods=["GET","POST"])
 def notif():
     notifs = subprocess.check_output("termux-notification-list")
     notifs = str(notifs.decode("utf8"))
-    
+    if request.method == "POST":
+    	return notifs
     return render_template("notif.html", title="Notifications", notifs=notifs)
 
 
