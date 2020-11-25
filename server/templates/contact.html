@@ -108,6 +108,9 @@ body{
 </div> 
 <script>
     var i = {{contacts|tojson}};
+    if(i[i.length -1]=="\n") {
+    	i = i.slice(0,-1);
+    }
     var contact = JSON.parse(i);
     for(var u =0;u < contact.length; u++) {
         $('#contact_loc').append('<div class="container profile"><div class="col-md-9"><div class="panel-body"><div class="row"><div class="col-sm-6"><div class="profile-blog blog-border"><img class="rounded-x" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/93/Google_Contacts_icon.svg/1200px-Google_Contacts_icon.svg.png" alt=""><div class="name-location"><strong>'+ contact[u]['name'] +'</strong><span><i class="fa fa-phone"></i>'+contact[u]['number']+'</span></div><div class="clearfix margin-bottom-20"></div><hr></div></div></div></div></div></div><br>');

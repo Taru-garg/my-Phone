@@ -18,6 +18,9 @@
 	$(document).ready(function(){
 	        localStorage.setItem("_lastSeen", Date.now());
 		var my_var = {{notifs|tojson}}
+		if(my_var == "") {
+		    alert("There was an error getting notifications");
+		}
 		let notification_track_id = new Map();
 		let notification_track_title = new Map();
 		my_var = JSON.parse(my_var);

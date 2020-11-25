@@ -1,9 +1,19 @@
 from imports import *
-from flask import make_response, jsonify
+from flask import make_response, jsonify, flash, send_from_directory
+from werkzeug.utils import secure_filename
 
 app = Flask(
     __name__, static_url_path="/storage/emulated/0", static_folder="/storage/emulated/0"
 )
+
+UPLOAD_FOLDER = "/storage/emulated/0"
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = "banana"
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route("/")
@@ -122,6 +132,38 @@ def video():
         video_names=video_names,
     )
 
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'],
+                               filename)
+
 
 @app.route("/findPhone", methods=["GET", "POST"])
 def findPhone():
@@ -129,7 +171,7 @@ def findPhone():
         passed = request.form["data"]
         if passed == "Play":
             try:
-                os.system("termux-media-player play iphone_6-30.ogg")
+                os.system("termux-media-player play /storage/emulated/0/SoftwareEngineeringProject/server/iphone_6-30.ogg")
                 return {"Message": "Playing"}
             except:
                 pass
@@ -161,13 +203,11 @@ def getBattery():
 @app.route("/contact")
 def contact():
     contacts = subprocess.check_output("termux-contact-list")
-    contact = contacts.decode("utf8").replace("'", '"')
-    data = json.loads(contact)
-    s = json.dumps(data)
+    contact = str(contacts.decode("utf8"))
     return render_template(
         "contact.html",
         title="Contacts",
-        contacts=s,
+        contacts=contact,
     )
 
 

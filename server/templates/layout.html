@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/jpg" href="/storage/emulated/0/SoftwareEngineeringProject/server/templates/fav.jpg"/>
 
+  <meta charset="UTF-8">
   {% block style %} {% endblock %}
   <style>
   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700&display=swap');
@@ -254,7 +255,14 @@
          	var width = document.getElementById("batt");
          	width.style.width=percent; 
             	width.title = percent;
-	  }, 100000);	   
+            	if(parseInt(percent) < 50) {
+            		width.style.backgroundColor = "#FCD110"
+            	} else if(parseInt(percent) < 20) {
+            		width.style.backgroundColor = "#FF3333"
+            	} else {
+            		width.style.backgroundColor = "#c8f86b"
+            	}
+	  }, 10000);	   
 	   var parsed_notifications;
 	   var last_date = Date.now();
 	   var last_seen = 0;
@@ -283,7 +291,7 @@
 			}
 			last_date = current_date;
 	   	    });
-	   }, 100000);
+	   }, 10000);
       	  </script>
       	  {% block script %} {% endblock %}
       	  <style>
