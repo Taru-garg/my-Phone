@@ -1,5 +1,5 @@
 # myPhone
-<p> myPhone tries to link you phone and laptop/computer much closely although windows has a pretty neat implementation of this in form of Your Phone (obviously the motivation for the name) and so do linux in form of GSConnect and KDE Connect but we wanted to try it out and see how we could do that. This project started of as final project that we had to submit for passing and completing a subject (Software Engg.) but for me and my teammates it is much more than that cause it was our first actual project. Though this has a lot of problems and issues cause it was something we were building while learning. But still it works!! </p>
+<p> myPhone tries to link you phone and laptop/computer much closely although windows has a pretty neat implementation of this in form of Your Phone (obviously the motivation for the name) and so do linux in form of GSConnect and KDE Connect but we wanted to try it out and see how we could do that. This project started of as final project that we had to submit for passing and completing a subject (Software Engg.) but it was our first actual project. Though this has a lot of problems and issues cause it was something we were building while learning. But still it works!! </p>
 
 <p> This project would not have been possible without the two amazing piece of software Termux and Termux-api. These two projects were the only reason we could make this. Who would have even thought of making a software for android in Python but thanks to termux we were actually able to do that and not only that but actually get a lot of features are for the most part dependant on Termux-api from which enables us to do all the cool stuff like call and find phone etc. </p>
 
@@ -17,7 +17,7 @@
 Most of the functionality of this app comes from Termux and Termux-api. Termux enables this app to run by providing an environment wherein we can run python code in Android and that is what basically enables in running the app. The app runs a Flask server on your phone through which all the data is actually made available 
 on the laptop. With the help of python we first find all the files we need and then make then available as links or some other way in case of media. Which is basically the whole File access part.
 
-Then for the rest of the features it is termux-api that comes into play. By using termux commands which are provided by termux-api we can fetch contacts, make calls, access battery, access clipboard etc. For e.g. to access the battery we make a get request to */getBattery* which in turn makes a proper call to termux api that which provides us with the data needed and similarly for other features.
+Then for the rest of the features it is termux-api that comes into play. By using termux commands which are provided by termux-api we can fetch contacts, make calls, access battery, access clipboard etc. For e.g. to access the battery we make a get request to */getBattery* which in turn makes a proper call to termux api  which provides us with the data needed and similarly for other features.
 
 ## Installation ##
  * Install termux and termux api (available on play store) on your phone.
